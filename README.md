@@ -33,8 +33,12 @@ The initial CSV file, named `Zone_heatmap.csv`, was provided by Juniper Networks
 ## Synthetic Data Generation
 Since reliable forecasting of device-connectivity counts requires training data that capture hourly, weekly and monthly seasonal cycles, we extend these logs into a five-year span via a probability-matched synthetic-data generator that back- and forward-fills gaps while preserving each zone’s base rate and seasonal fingerprints within tight tolerances.
 
-![terminal screenshot synthetic generator](assets/terminal_screenshot_synthetic_generator.png)  
-*Figure&nbsp;B – Screenshot of the terminal output from the script `synthetic_generator.py`.*
+<figure>
+  <img src="assets/terminal_screenshot_synthetic_generator.png"
+       alt="terminal screenshot synthetic generator" width="60%">
+  <figcaption><em>Figure&nbsp;B – Screenshot of the terminal output from the script
+  <code>synthetic_generator.py</code>.</em></figcaption>
+</figure>
 
 ## Federated Learning Pipeline
 To address non-IID heterogeneity, we begin by applying statistical tests that confirm distributional skew across clients. Our end-to-end federated-learning pipeline then integrates:
