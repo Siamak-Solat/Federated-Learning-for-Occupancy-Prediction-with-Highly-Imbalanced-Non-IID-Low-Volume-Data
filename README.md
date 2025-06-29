@@ -15,7 +15,7 @@
 - [Synthetic Data Generation](#synthetic-data-generation)
 - [Federated Learning Pipeline](#federated-learning-pipeline)
 - [Experimental Setup & Results](#experimental-setup--results)
-- [Repository layout](#repository-layout)
+- [Repository Layout](#repository-layout)
 
 ---
 
