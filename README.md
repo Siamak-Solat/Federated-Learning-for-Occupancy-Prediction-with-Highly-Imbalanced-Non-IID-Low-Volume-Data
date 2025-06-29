@@ -48,8 +48,6 @@ github_repository/
     └── Zone_heatmap.csv   # raw Juniper export
 ```
 
-
-
 ---
 
 ## 3. Quick start
