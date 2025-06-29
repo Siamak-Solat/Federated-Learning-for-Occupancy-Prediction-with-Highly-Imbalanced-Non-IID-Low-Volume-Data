@@ -21,8 +21,6 @@ It forecasts the number of connected devices (a proxy for human presence) in eig
 
 ## 2. Repository layout
 
-## 2. Repository layout
-
 ```text
 github_repository/
 ├── federated_learning/
