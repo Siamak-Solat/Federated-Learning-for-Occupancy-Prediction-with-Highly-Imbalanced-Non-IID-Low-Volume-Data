@@ -21,7 +21,6 @@ It forecasts the number of connected devices (a proxy for human presence) in eig
 
 ## 2. Repository layout
 
-```text
 github_repository/
 ├── federated_learning/
 │   ├── server_coordinator.py
@@ -46,9 +45,7 @@ github_repository/
     └── Zone_heatmap.csv   # raw Juniper export
 
 
-
----
-
+## 2. Repository layout
 ## 3. Quick start
 
 ### 3.1 Clone and install
