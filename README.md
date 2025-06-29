@@ -27,7 +27,7 @@ In this work, we tackle the problem of accurate short-term occupancy prediction 
 The initial CSV file, named `Zone_heatmap.csv`, was provided by Juniper Networks in collaboration with Atos's BTIC team during the CP4SC French research project. It is a time-series matrix with 24,831 rows and 9 columns, representing 511 days of 15-minute-interval logs across eight distinct zones.
 
 ![BTIC zones map](assets/BTICzones.png)  
-*Figure&nbsp;1 – BTIC zones map.*
+*Figure&nbsp;A – Geographical layout of the BTIC zones.*
 
 
 ## Synthetic Data Generation
