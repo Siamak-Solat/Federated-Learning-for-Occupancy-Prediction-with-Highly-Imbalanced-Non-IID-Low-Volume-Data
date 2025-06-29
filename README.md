@@ -4,18 +4,40 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](#requirements)
 
-> **Paper:** S. Solat & N. Georgantas,  
+> **Paper:** Siamak Solat and Nikolaos Georgantas,  
 > *Federated Learning for Occupancy Prediction with Highly Imbalanced, Non-IID, Low-Volume Data* (CoopIS 2025)
 
 ---
 
-## 1. Overview
-This repository contains the full data-engineering and **federated-learning (FL)** pipeline described in the paper above.  
-It forecasts the number of connected devices (a proxy for human presence) in eight building zones while keeping raw data **on-premise**.
+# Smart-Building Short-Term Occupancy Prediction
 
-* **Data challenges:** extreme sparsity and imbalance, short history, strong non-IID behaviour between zones.  
-* **Key ideas:** focal-MSE / Huber / Pinball losses, dynamic FedProx aggregation, synthetic data expansion, seasonal drift correction.  
-* **Outcome:** correlations ≥ 0.85 on 6 / 8 zones and < 7 % absolute load error in the busiest areas—without centralising any raw logs.
+## Table of Contents
+- [Overview](#overview)
+- [Dataset](#dataset)
+- [Synthetic Data Generation](#synthetic-data-generation)
+- [Federated Learning Pipeline](#federated-learning-pipeline)
+- [Experimental Setup & Results](#experimental-setup--results)
+
+---
+
+## Overview
+In this work, we tackle the problem of accurate short-term occupancy prediction in smart buildings using connected-device logs—data that, despite being a convenient proxy for human presence, suffer from four core challenges: (1) low overall volume; (2) extreme sparsity and severe class imbalance; (3) pronounced non-IID heterogeneity across physical zones; and (4) privacy constraints that preclude raw-data sharing.
+
+## Dataset
+The initial CSV file, named `Zone_heatmap.csv`, was provided by Juniper Networks in collaboration with Atos's BTIC team during the CP4SC French research project. It is a time-series matrix with 24,831 rows and 9 columns, representing 511 days of 15-minute-interval logs across eight distinct zones.
+
+## Synthetic Data Generation
+Since reliable forecasting of device-connectivity counts requires training data that capture hourly, weekly and monthly seasonal cycles, we extend these logs into a five-year span via a probability-matched synthetic-data generator that back- and forward-fills gaps while preserving each zone’s base rate and seasonal fingerprints within tight tolerances.
+
+## Federated Learning Pipeline
+To address non-IID heterogeneity, we begin by applying statistical tests that confirm distributional skew across clients. Our end-to-end federated-learning pipeline then integrates:
+
+- **A dynamic FedProx-style aggregation server**, which adaptively tunes its proximal coefficient based on client dispersion and deploys zone-specific optimizers and learning schedules to ensure stable convergence;
+
+- **A family of imbalance-aware loss functions**—including focal-MSE, Huber, and pinball losses—calibrated to each zone’s zero/non-zero ratio, with guarded calibration maps to stabilize updates and offset bias.
+
+## Experimental Setup & Results
+We implemented the entire workflow on Google Colab using an NVIDIA A100 GPU. In experiments spanning eight heterogeneous zones, our method achieves Pearson correlations of at least 0.85 for both hourly and monthly occupancy in six zones, reduces July–December 2025 aggregate-load forecasting error to below 7 % in the busiest areas, and maintains negligible forecast bias—all while keeping raw observations entirely local. These results confirm the practical viability of federated learning for IoT time-series forecasting under extreme data scarcity, distribution skew, and privacy restrictions.
 
 ---
 
