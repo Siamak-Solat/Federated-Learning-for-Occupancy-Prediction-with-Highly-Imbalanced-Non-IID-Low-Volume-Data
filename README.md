@@ -52,12 +52,11 @@ github_repository/
 │   ├── client_train_val_test.py
 │   ├── client_inference.py
 │   └── all_zones.yaml
-├── helpers_for-data-engineering/
+├── data-engineering/
 │   ├── restore_missing_rows.py
 │   ├── synthetic_generator.py
 │   ├── patterns.py
-│   ├── add_column.py
-│   └── utils.py          # (optional) shared helpers
+│   └── add_column.py
 └── zones_datasets/
     ├── Accueil_dataset.xlsx
     ├── BTIC_Office_dataset.xlsx
@@ -67,7 +66,7 @@ github_repository/
     ├── Regie_dataset.xlsx
     ├── Team_Office_dataset.xlsx
     ├── Tech_Area_dataset.xlsx
-    └── Zone_heatmap.csv   # raw Juniper export
+    └── Zone_heatmap.csv   # The initial CSV file provided by Juniper Networks in collaboration with Atos's BTIC team during the CP4SC French research project.
 ```
 
 ---
