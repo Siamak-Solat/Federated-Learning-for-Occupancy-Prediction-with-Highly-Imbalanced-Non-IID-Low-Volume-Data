@@ -15,6 +15,7 @@
 - [Synthetic Data Generation](#synthetic-data-generation)
 - [Federated Learning Pipeline](#federated-learning-pipeline)
 - [Experimental Setup & Results](#experimental-setup--results)
+- [Repository layout](#repository-layout)
 
 ---
 
@@ -41,7 +42,7 @@ We implemented the entire workflow on Google Colab using an NVIDIA A100 GPU. In 
 
 ---
 
-## 2. Repository layout
+## Repository layout
 
 ```text
 github_repository/
@@ -70,7 +71,6 @@ github_repository/
 
 ---
 
-## Floor-plan (BTIC Corporate Paris)
 
 
 
