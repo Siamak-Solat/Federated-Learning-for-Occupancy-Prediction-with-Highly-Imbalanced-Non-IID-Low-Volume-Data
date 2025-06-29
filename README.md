@@ -48,13 +48,8 @@ github_repository/
 
 ---
 
-## 3. Quick start
+## Floor-plan (BTIC Corporate Paris)
 
-### 3.1 Clone and install
+![BTIC Corporate Paris zones](assets/BTICzones.png)
 
-```bash
-git clone https://github.com/<ORG>/Federated-Learning-for-Occupancy-Prediction-with-Highly-Imbalanced-Non-IID-Low-Volume-Data.git
-cd Federated-Learning-*
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
 
