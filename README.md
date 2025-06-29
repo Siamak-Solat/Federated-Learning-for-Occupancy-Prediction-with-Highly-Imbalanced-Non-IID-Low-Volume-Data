@@ -21,6 +21,8 @@ It forecasts the number of connected devices (a proxy for human presence) in eig
 
 ## 2. Repository layout
 
+## 2. Repository layout
+
 ```text
 github_repository/
 ├── federated_learning/
@@ -44,7 +46,8 @@ github_repository/
     ├── Team_Office_dataset.xlsx
     ├── Tech_Area_dataset.xlsx
     └── Zone_heatmap.csv   # raw Juniper export
-```   <-- add this line
+```
+
 
 
 ---
