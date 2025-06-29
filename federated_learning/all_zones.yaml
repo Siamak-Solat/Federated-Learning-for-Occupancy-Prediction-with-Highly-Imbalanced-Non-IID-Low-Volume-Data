@@ -1,0 +1,86 @@
+# ────────────────────────────────────────────────────────────────
+#  all_zones.yaml
+# ────────────────────────────────────────────────────────────────
+common:
+  patterns_excel: patterns.xlsx
+
+  # ───────── Sliding-window parameters ─────────
+  window_length: 192
+  stride: 1
+  horizon: 1
+
+  # ───────── Base LSTM architecture ─────────
+  model:
+    lstm_layers: 2
+    lstm_units: 64
+    dense_units: 32
+    batch_size: 256
+    epochs: 20
+    lr: 0.001
+
+  # ───────── Imbalance (focal-MSE default) ─────────
+  imbalance:
+    focal_gamma: 2.0
+    class_weight_zero: 1.0
+    class_weight_nonzero: 0.0
+
+  # ───────── Loss selector ─────────
+  loss: mse
+
+  # ───────── Early-Stopping defaults ─────────
+  early_stopping:
+    patience: 4
+    min_delta: 0.001
+
+  # ───────── Pattern-alignment ─────────
+  pattern_alignment:
+    enabled:    true
+    iterations: 3
+    clip_min:   0.5
+    clip_max:   2.0
+
+  # ───────── Auto-regressive forecast ─────────
+  autoregressive:
+    feedback_noise_std: 0.02
+
+  # ───────── Federated setup ─────────
+  federated:
+    rounds: 5
+    mu_base: 0.01
+    mu_min: 0.005
+    mu_max: 0.05
+
+zones:
+  Accueil:
+    input_excel: Accueil_dataset.xlsx
+
+  BTIC_Office:
+    input_excel: BTIC_Office_dataset.xlsx
+
+  Casablanca:
+    input_excel: Casablanca_dataset.xlsx
+    model:
+      epochs: 35
+    loss: huber
+
+  Discovery:
+    input_excel: Discovery_dataset.xlsx
+
+  Experience:
+    input_excel: Experience_dataset.xlsx
+
+  Regie:
+    input_excel: Regie_Columns_dataset.xlsx
+    model:
+      batch_size: 512
+    loss: pinball
+    pinball_tau: 0.9
+
+  Team_Office:
+    input_excel: Team_Office_dataset.xlsx
+
+  Tech_Area:
+    input_excel: Tech_Area_dataset.xlsx
+    model:
+      lr: 0.0005
+      epochs: 30
