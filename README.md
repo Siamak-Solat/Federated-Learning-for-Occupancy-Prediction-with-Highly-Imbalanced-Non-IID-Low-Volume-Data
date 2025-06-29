@@ -27,29 +27,7 @@ It predicts the number of connected devices (a proxy for human presence) for eig
 
 ---
 
-## 2. Repository layout
 
-```
-
-github\_repository/
-├── federated\_learning/
-│   ├── server\_coordinator.py
-│   ├── client\_train\_val\_test.py
-│   ├── client\_inference.py
-│   └── all\_zones.yaml
-├── helpers\_for-data-engineering/
-│   ├── restore\_missing\_rows.py
-│   ├── synthetic\_generator.py
-│   ├── patterns.py
-│   ├── add\_column.py
-│   └── utils.py            # extra helpers if added later
-└── zones\_datasets/
-├── Accueil\_dataset.xlsx
-├── BTIC\_Office\_dataset.xlsx
-├── … (8 total)
-└── Zone\_heatmap.csv    # raw Juniper dump
-
-````
 
 ---
 
