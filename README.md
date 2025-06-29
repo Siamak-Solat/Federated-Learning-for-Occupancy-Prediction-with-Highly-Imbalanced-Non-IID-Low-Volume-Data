@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](#requirements)
 
 > **Paper:** Siamak Solat and Nikolaos Georgantas,  
-> *Federated Learning for Occupancy Prediction with Highly Imbalanced, Non-IID, Low-Volume Data* (CoopIS 2025)
+> *Federated Learning for Occupancy Prediction with Highly Imbalanced, Non-IID, Low-Volume Data* (Submitted to CoopIS 2025 Conference)
 
 ---
 
