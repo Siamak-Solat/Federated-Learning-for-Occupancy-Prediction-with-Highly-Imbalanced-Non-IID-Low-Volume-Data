@@ -26,7 +26,9 @@ In this work, we tackle the problem of accurate short-term occupancy prediction 
 ## Dataset
 The initial CSV file, named `Zone_heatmap.csv`, was provided by Juniper Networks in collaboration with Atos's BTIC team during the CP4SC French research project. It is a time-series matrix with 24,831 rows and 9 columns, representing 511 days of 15-minute-interval logs across eight distinct zones.
 
-![BTIC zones map](assets/BTICzones.png)
+![BTIC zones map](assets/BTICzones.png)  
+*Figure&nbsp;1 – BTIC zones map.*
+
 
 ## Synthetic Data Generation
 Since reliable forecasting of device-connectivity counts requires training data that capture hourly, weekly and monthly seasonal cycles, we extend these logs into a five-year span via a probability-matched synthetic-data generator that back- and forward-fills gaps while preserving each zone’s base rate and seasonal fingerprints within tight tolerances.
