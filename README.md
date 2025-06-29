@@ -1,4 +1,4 @@
-# Federated Learning for Occupancy Prediction  
+# Federated Learning for Occupancy Prediction with Highly Imbalanced, Non-IID, Low-Volume Data: An Empirical Study  
 **Highly-Imbalanced · Non-IID · Low-Volume IoT Logs**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)
