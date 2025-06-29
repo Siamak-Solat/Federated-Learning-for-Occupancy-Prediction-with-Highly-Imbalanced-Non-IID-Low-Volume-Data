@@ -50,6 +50,6 @@ github_repository/
 
 ## Floor-plan (BTIC Corporate Paris)
 
-![BTIC Corporate Paris zones](assets/BTICzones.png)
+![BTIC zones maps](assets/BTICzones.png)
 
 
