@@ -44,3 +44,18 @@ github_repository/
     ├── Team_Office_dataset.xlsx
     ├── Tech_Area_dataset.xlsx
     └── Zone_heatmap.csv   # raw Juniper export
+
+
+
+---
+
+## 3. Quick start
+
+### 3.1 Clone and install
+
+```bash
+git clone https://github.com/<ORG>/Federated-Learning-for-Occupancy-Prediction-with-Highly-Imbalanced-Non-IID-Low-Volume-Data.git
+cd Federated-Learning-*
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
