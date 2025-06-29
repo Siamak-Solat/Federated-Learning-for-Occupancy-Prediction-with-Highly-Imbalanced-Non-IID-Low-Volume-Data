@@ -1,11 +1,11 @@
 # Federated-Learning-for-Occupancy-Prediction-with-Highly-Imbalanced-Non-IID-Low-Volume-Data
 
-Below is a **clean, plain-Markdown** README ready to drop into `README.md`.
-I removed the collapsible `<details>` tags and any other HTML so everything renders the same on GitHub, GitLab, Bitbucket, etc.
+Below is a **drop-in-ready** `README.md`.
+The directory tree is now inside an explicit Markdown code-block, so it will render correctly on GitHub, GitLab, Bitbucket, etc.
 
 ---
 
-```markdown
+````markdown
 # Federated Learning for Occupancy Prediction  
 **Highly-Imbalanced · Non-IID · Low-Volume IoT Logs**
 
@@ -18,31 +18,56 @@ I removed the collapsible `<details>` tags and any other HTML so everything rend
 ---
 
 ## 1. Overview
-This repository contains the complete data-engineering and **federated learning (FL)** workflow described in the paper above.  
-It predicts the number of connected devices (a proxy for human presence) for eight building zones while keeping raw data local to each zone.
+This repository contains the full data-engineering and **federated-learning (FL)** pipeline described in the paper above.  
+It forecasts the number of connected devices (a proxy for human presence) in eight building zones while keeping raw data **on-premise**.
 
-* **Data challenges:** extreme sparsity and class imbalance, short history, strong non-IID distribution across zones.  
+* **Data challenges:** extreme sparsity and imbalance, short history, strong non-IID behaviour between zones.  
 * **Key ideas:** focal-MSE / Huber / Pinball losses, dynamic FedProx aggregation, synthetic data expansion, seasonal drift correction.  
-* **Outcome:** correlations ≥ 0.85 on 6 / 8 zones and < 7 % absolute load error in the busiest areas—without centralising any raw logs.
+* **Outcome:** correlations ≥ 0.85 on 6 / 8 zones and < 7 % absolute load error in the busiest areas—without centralising any raw logs.
 
 ---
 
+## 2. Repository layout
 
+```text
+github_repository/
+├── federated_learning/
+│   ├── server_coordinator.py
+│   ├── client_train_val_test.py
+│   ├── client_inference.py
+│   └── all_zones.yaml
+├── helpers_for-data-engineering/
+│   ├── restore_missing_rows.py
+│   ├── synthetic_generator.py
+│   ├── patterns.py
+│   ├── add_column.py
+│   └── utils.py          # (optional) shared helpers
+└── zones_datasets/
+    ├── Accueil_dataset.xlsx
+    ├── BTIC_Office_dataset.xlsx
+    ├── Casablanca_dataset.xlsx
+    ├── Discovery_dataset.xlsx
+    ├── Experience_dataset.xlsx
+    ├── Regie_dataset.xlsx
+    ├── Team_Office_dataset.xlsx
+    ├── Tech_Area_dataset.xlsx
+    └── Zone_heatmap.csv   # raw Juniper export
+````
 
 ---
 
 ## 3. Quick start
 
-### 3.1 Clone and install
+### 3.1 Clone & install
 
 ```bash
 git clone https://github.com/<ORG>/Federated-Learning-for-Occupancy-Prediction-with-Highly-Imbalanced-Non-IID-Low-Volume-Data.git
 cd Federated-Learning-*
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-````
+```
 
-**requirements.txt (reference)**
+`requirements.txt` reference:
 
 ```
 # Core
@@ -61,31 +86,31 @@ scikit-learn>=1.4
 openpyxl>=3.1
 ```
 
-### 3.2 Prepare data (run once, in this order)
+### 3.2 Prepare data (run once)
 
 ```bash
-python helpers_for-data-engineering/add_column.py          # normalise headers
-python helpers_for-data-engineering/restore_missing_rows.py # fill 15-min gaps
-python helpers_for-data-engineering/synthetic_generator.py  # extend to 5 yrs
-python helpers_for-data-engineering/patterns.py             # seasonality tables
+python helpers_for-data-engineering/add_column.py
+python helpers_for-data-engineering/restore_missing_rows.py
+python helpers_for-data-engineering/synthetic_generator.py
+python helpers_for-data-engineering/patterns.py
 ```
 
-### 3.3 Train federated models
+### 3.3 Train federated models
 
 ```bash
-# ---------- on each client machine ----------
+# ── on each client ──
 python federated_learning/client_train_val_test.py --zone Accueil --round 0
 # …repeat for other zones…
 
-# ---------- on the central server ----------
+# ── on the central server ──
 python federated_learning/server_coordinator.py
 ```
 
 * Round 0 = local warm-start.
-* Number of global rounds is set in `all_zones.yaml` (`common.federated.rounds`, default = 3).
-* Global checkpoints are saved to `global_weights/`.
+* Global rounds controlled by `common.federated.rounds` in `all_zones.yaml` (default = 3).
+* Aggregated checkpoints saved in `global_weights/`.
 
-### 3.4 Run inference / forecast 2026
+### 3.4 Run inference / forecast 2026
 
 ```bash
 python federated_learning/client_inference.py --zone Accueil
@@ -95,16 +120,16 @@ Creates `Accueil_forecast_2026.xlsx` plus evaluation metrics.
 
 ---
 
-## 4. Configuration quick reference (`all_zones.yaml`)
+## 4. Key YAML parameters (`all_zones.yaml`)
 
-| Key                          | Default     | Purpose                                     |
-| ---------------------------- | ----------- | ------------------------------------------- |
-| `common.federated.rounds`    | `3`         | Number of global aggregation rounds         |
-| `common.federated.mu_base`   | `0.01`      | Base FedProx μ (scaled by round dispersion) |
-| `zones.<ZONE>.loss`          | `focal_mse` | Loss: `focal_mse`, `huber`, or `pinball`    |
-| `zones.<ZONE>.window_length` | `96`        | LSTM look-back (96 × 15 min = 24 h)         |
-| `zones.<ZONE>.batch_size`    | `32`        | Local mini-batch size                       |
-| `zones.<ZONE>.epochs`        | `30`        | Local epochs before early stopping          |
+| Parameter                    | Default     | Meaning                                 |
+| ---------------------------- | ----------- | --------------------------------------- |
+| `common.federated.rounds`    | `3`         | Global aggregation rounds               |
+| `common.federated.mu_base`   | `0.01`      | Base FedProx μ (scaled by round spread) |
+| `zones.<ZONE>.loss`          | `focal_mse` | Loss: `focal_mse`, `huber`, `pinball`   |
+| `zones.<ZONE>.window_length` | `96`        | LSTM look-back (96×15 min = 24 h)       |
+| `zones.<ZONE>.batch_size`    | `32`        | Local minibatch size                    |
+| `zones.<ZONE>.epochs`        | `30`        | Local epochs before early-stop          |
 
 ---
 
@@ -121,21 +146,21 @@ Creates `Accueil_forecast_2026.xlsx` plus evaluation metrics.
 | Team Office |   0.96   |     0.29     |    0.90   |  41.7  |
 | Tech Area   |   0.85   |     0.91     |    0.14   |  79.7  |
 
-See Section 9 of the paper for full discussion.
+See the paper for full discussion.
 
 ---
 
 ## 6. Requirements
 
 * **Python ≥ 3.9**
-* One NVIDIA GPU (A100 on Colab is fine; CPU also works but is slow)
-* Disk: \~200 MB (raw data + checkpoints)
+* One NVIDIA GPU (A100 on Colab is fine; CPU also works but is slower)
+* Disk: \~200 MB (datasets + checkpoints)
 
 ---
 
 ## 7. License
 
-This project is released under the MIT License — see `LICENSE`.
+This project is released under the **MIT License** — see `LICENSE`.
 
 ---
 
@@ -155,7 +180,7 @@ This project is released under the MIT License — see `LICENSE`.
 
 ## 9. Contact
 
-**Siamak Solat** — [siamak.solat@inria.fr](mailto:siamak.solat@inria.fr) • [siamak.solat@gmail.com](mailto:siamak.solat@gmail.com)
+**Siamak Solat** — [siamak.solat@inria.fr](mailto:siamak.solat@inria.fr) · [siamak.solat@gmail.com](mailto:siamak.solat@gmail.com)
 Issues and pull requests are welcome!
 
 ```
@@ -163,8 +188,8 @@ Issues and pull requests are welcome!
 ---
 
 ### How to use it
-1. Copy everything between the triple-backtick blocks (inclusive) into a new `README.md`.
-2. Add a `LICENSE` file with the MIT text.
-3. Create `requirements.txt` from the list above or via `pip freeze`.
-4. Commit and push — done!
+1. Copy everything between the triple-backtick blocks into a new `README.md`.
+2. Add a `LICENSE` file containing the MIT text.
+3. Supply a `requirements.txt` (list above) or an `environment.yml`.
+4. Commit and push—done!
 ```
