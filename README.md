@@ -50,7 +50,7 @@ To address non-IID heterogeneity, we begin by applying statistical tests that co
 - **A family of imbalance-aware loss functions**—including focal-MSE, Huber, and pinball losses—calibrated to each zone’s zero/non-zero ratio, with guarded calibration maps to stabilize updates and offset bias.
 
 ## Experimental Setup & Results
-We implemented the entire workflow on Google Colab using an NVIDIA A100 GPU. In experiments spanning eight heterogeneous zones, our method achieves Pearson correlations of at least 0.85 for both hourly and monthly occupancy in six zones, reduces July–December 2025 aggregate-load forecasting error to below 7 % in the busiest areas, and maintains negligible forecast bias—all while keeping raw observations entirely local. These results confirm the practical viability of federated learning for IoT time-series forecasting under extreme data scarcity, distribution skew, and privacy restrictions.
+We executed the entire workflow on Google Colab using an NVIDIA A100 GPU. In experiments spanning eight heterogeneous zones, our method achieves Pearson correlations of at least 0.85 for both hourly and monthly occupancy in six zones, reduces July–December 2025 aggregate-load forecasting error to below 7 % in the busiest areas, and maintains negligible forecast bias—all while keeping raw observations entirely local. These results confirm the practical viability of federated learning for IoT time-series forecasting under extreme data scarcity, distribution skew, and privacy restrictions.
 
 ---
 
