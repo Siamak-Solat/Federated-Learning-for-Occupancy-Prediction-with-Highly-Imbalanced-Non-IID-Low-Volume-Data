@@ -1,6 +1,15 @@
-# ────────────────────────────────────────────────────────────────
-#  synthetic_generator.py     
-# ────────────────────────────────────────────────────────────────
+
+# SPDX-License-Identifier: MIT
+# © 2025 Siamak Solat
+"""
+synthetic_generator.py – Monte-Carlo synthesis of realistic 15-minute data.
+
+• Learns per-slot/weekday/month occurrence probabilities and value
+  distributions from an existing zone workbook  
+• Iteratively tunes κ until the synthetic/non-synthetic ratio matches the
+  original imbalance (tolerance ±0.1 % absolute or 5 % relative)  
+• Writes `<Zone>_Columns_Added_Missing_Rows_Added_Synthetic_Added.xlsx`
+"""
 
 from pathlib import Path
 import pandas as pd

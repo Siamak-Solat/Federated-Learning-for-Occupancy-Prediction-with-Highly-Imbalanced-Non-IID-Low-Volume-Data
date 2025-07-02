@@ -1,6 +1,14 @@
-# ────────────────────────────────────────────────────────────────
-#  restore_missing_rows.py     
-# ────────────────────────────────────────────────────────────────
+
+# SPDX-License-Identifier: MIT
+# © 2025 Siamak Solat
+"""
+restore_missing_rows.py – fill 15-minute gaps in zone heat-map workbooks.
+
+• Accepts `Zone_Heatmap_*_Columns_Added.xlsx` files  
+• Re-creates any missing time-steps between
+  2022-12-01 00:00 and 2025-04-29 23:45 and sets device count = 0  
+• Outputs `<Zone>_Columns_Added_Non_Existed_Rows_Added.xlsx`
+"""
 
 from pathlib import Path
 import pandas as pd

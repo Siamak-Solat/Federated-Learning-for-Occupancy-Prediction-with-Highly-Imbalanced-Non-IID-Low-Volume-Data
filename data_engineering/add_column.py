@@ -1,6 +1,14 @@
-# ────────────────────────────────────────────────────────────────
-#  add_column.py
-# ────────────────────────────────────────────────────────────────
+
+# SPDX-License-Identifier: MIT
+# © 2025 Siamak Solat
+"""
+add_column.py – enrich zone workbooks with calendar columns.
+
+• Adds “Day of Week” and “Month” derived from the “Date” column  
+• Re-orders columns so core metadata appears first  
+• Saves each `*_Original.xlsx` as `*_Columns_Added.xlsx`
+"""
+
 
 import sys
 from pathlib import Path

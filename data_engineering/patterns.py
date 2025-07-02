@@ -1,6 +1,13 @@
-# ────────────────────────────────────────────────────────────────
-#  patterns.py     
-# ────────────────────────────────────────────────────────────────
+
+# SPDX-License-Identifier: MIT
+# © 2025 Siamak Solat
+"""
+patterns.py – build per-zone zero/Non-zero pattern tables.
+
+• Generates weekly, monthly and yearly summaries for every
+  `*_dataset.xlsx` file and writes them to *patterns.xlsx*
+"""
+
 
 from pathlib import Path
 import pandas as pd
