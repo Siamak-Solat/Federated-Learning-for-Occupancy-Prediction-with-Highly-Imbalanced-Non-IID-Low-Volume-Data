@@ -1,6 +1,14 @@
-# ────────────────────────────────────────────────────────────────
-#  client_train_val_test.py     
-# ────────────────────────────────────────────────────────────────
+
+# SPDX-License-Identifier: MIT
+# © 2025 Siamak Solat
+"""
+client_train_val_test.py – local training/validation/testing for one zone.
+
+• Builds or resumes an LSTM, applies focal-MSE / Huber / Pinball loss  
+• Splits data (2021-24 train, 2025-H1 val, 2025-H2 test)  
+• Calibrates output (linear regression), writes test predictions, and
+  checkpoints `<ZONE>_round<R>.keras`
+"""
 
 import sys, re, os, warnings, json
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"

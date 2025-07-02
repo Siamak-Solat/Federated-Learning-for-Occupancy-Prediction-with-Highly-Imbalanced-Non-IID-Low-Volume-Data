@@ -1,6 +1,27 @@
-# ────────────────────────────────────────────────────────────────
-#  server_coordinator.py     
-# ────────────────────────────────────────────────────────────────
+
+# SPDX-License-Identifier: MIT
+# © 2025 Siamak Solat
+"""
+federated_server.py
+
+  Workflow:
+  1. Each client (one per zone) trains a local model for a given round r
+     and uploads:
+          •  <zone>_round{r}.keras           – model weights
+          •  <zone>_metrics_round{r}.json    – loss, sample counts
+  2. The server polls until all zones have uploaded their files.
+  3. It averages the weights and then applies a FedProx-style proximal correction
+           w ← w – μ · (w – w_prev)
+     where μ is computed dynamically from the inter-client dispersion and
+     clipped to the range [MU_MIN, MU_MAX].
+  4. Global losses are recomputed from the client-reported metrics and
+     appended to global_metrics.csv.
+  5. The aggregated weights are saved to
+         global_weights/global_round{r}.keras
+     and the loop continues for the configured number of rounds.
+
+  After the final round the model is exported as final_global.keras.
+"""
 
 import os, time, yaml, json
 import numpy as np

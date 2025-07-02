@@ -1,6 +1,14 @@
-# ────────────────────────────────────────────────────────────────
-#  client_inference.py     
-# ────────────────────────────────────────────────────────────────
+
+# SPDX-License-Identifier: MIT
+# © 2025 Siamak Solat
+"""
+client_inference.py – autoregressive 2026 forecast for a single zone.
+
+• Loads the final LSTM model and calibration parameters  
+• Rolls forward 96 × 365 steps (15-min resolution) with optional noise
+  feedback and pattern alignment  
+• Saves `<ZONE>_forecast_2026.xlsx`
+"""
 
 import os, argparse, yaml, numpy as np, pandas as pd, tensorflow as tf, joblib
 from tqdm import tqdm
