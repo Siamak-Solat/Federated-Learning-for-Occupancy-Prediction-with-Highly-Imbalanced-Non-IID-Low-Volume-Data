@@ -21,7 +21,23 @@
 ---
 
 ## Overview
-In this work, we tackle the problem of accurate short-term occupancy prediction in smart buildings using connected-device logs—data that, despite being a convenient proxy for human presence, suffer from four core challenges: (1) low overall volume; (2) extreme sparsity and severe class imbalance; (3) pronounced non-IID heterogeneity across physical zones; and (4) privacy constraints that preclude raw-data sharing.
+Connected-device logs are a common proxy for estimating human occupancy in smart buildings, but they pose several challenges for machine-learning practitioners.
+
+As part of the CP4SC French research project, data were collected over 511 days at 15-minute intervals across eight zones.
+
+Accurate forecasting of device-connectivity counts often requires training data that are long enough to capture seasonal patterns.
+
+The data are ill-suited to federated learning, especially for long-term prediction, due to (i) low volume, (ii) extreme sparsity and class imbalance, and (iii) demonstrably non-IID distributions.
+
+We address these challenges with a proof-of-concept federated learning pipeline that includes:
+
+1. statistical tests confirming non-IID distributions,
+2. a synthetic-data generator that preserves seasonal patterns while filling gaps,
+3. a dynamic FedProx-style server for stable aggregation, and
+4. focal-MSE loss functions calibrated to each zone’s imbalance ratio.
+
+Experiments across eight heterogeneous zones show our method achieves Pearson correlations ≥ 0.85 for both hourly and monthly occupancy in six zones, reduces July–December 2025 aggregate-load error to under 7 % in the busiest areas, and maintains negligible forecast bias—all while keeping raw data local.
+
 
 ## Dataset
 The initial CSV file, named `Zone_heatmap.csv`, was provided by Juniper Networks in collaboration with Atos's BTIC team during the CP4SC French research project. It is a time-series matrix with 24,831 rows and 9 columns, representing 511 days of 15-minute-interval logs across eight distinct zones.
