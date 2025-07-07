@@ -2,12 +2,12 @@
 # SPDX-License-Identifier: MIT
 # © 2025 Siamak Solat
 """
-restore_missing_rows.py – fill 15-minute gaps in zone heat-map workbooks.
+restore_missing_rows.py - fill 15-minute gaps in zone heat-map workbooks.
 
 • Accepts `Zone_Heatmap_*_Columns_Added.xlsx` files  
 • Re-creates any missing time-steps between
   2022-12-01 00:00 and 2025-04-29 23:45 and sets device count = 0  
-• Outputs `<Zone>_Columns_Added_Non_Existed_Rows_Added.xlsx`
+• Outputs `<Zone>_Columns_Added_Missing_Rows_Added.xlsx`
 """
 
 from pathlib import Path
@@ -18,7 +18,7 @@ from typing import Tuple
 INPUT_PATTERN = "Zone_Heatmap_*_Columns_Added.xlsx"
 START_DATETIME = "2022-12-01 00:00"
 END_DATETIME   = "2025-04-29 23:45"
-FREQ           = "15T"                       
+FREQ           = "15min"                       
 DATE_FORMAT    = "%Y-%m-%d %H:%M"
 
 def detect_device_column(columns) -> str:
@@ -38,8 +38,8 @@ def load_original(path: Path) -> Tuple[pd.DataFrame, str]:
 
     Returns
     -------
-    df          : pd.DataFrame – original rows, indexed by helper DateTime
-    device_col  : str          – the name of the device-count column
+    df          : pd.DataFrame - original rows, indexed by helper DateTime
+    device_col  : str          - the name of the device-count column
     """
     df = pd.read_excel(path)
 
@@ -85,13 +85,13 @@ def make_missing_rows(missing: pd.DatetimeIndex, device_col: str) -> pd.DataFram
 def build_output_filename(input_file: Path) -> str:
     """
     Convert 'Zone_Heatmap_<Zone>_Columns_Added.xlsx'
-    to '<Zone>_Columns_Added_Non_Existed_Rows_Added.xlsx'
+    to '<Zone>_Columns_Added_Missing_Rows_Added.xlsx'
     """
     m = re.match(r"Zone_Heatmap_(.+)_Columns_Added\.xlsx$", input_file.name)
     if not m:
         raise ValueError(f"Unexpected file name: {input_file.name}")
     zone = m.group(1)
-    return f"{zone}_Columns_Added_Non_Existed_Rows_Added.xlsx"
+    return f"{zone}_Columns_Added_Missing_Rows_Added.xlsx"
 
 
 def process_file(path: Path) -> None:

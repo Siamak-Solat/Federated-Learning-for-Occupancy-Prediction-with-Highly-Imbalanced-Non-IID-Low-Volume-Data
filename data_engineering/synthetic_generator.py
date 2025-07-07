@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # © 2025 Siamak Solat
 """
-synthetic_generator.py – Monte-Carlo synthesis of realistic 15-minute data.
+synthetic_generator.py - Monte-Carlo synthesis of realistic 15-minute data.
 
 • Learns per-slot/weekday/month occurrence probabilities and value
   distributions from an existing zone workbook  
@@ -173,7 +173,7 @@ def process_file(path: Path):
 
 # ------------------------------ Main -------------------------------- #
 if __name__ == "__main__":
-    files = sorted(Path(".").glob("*_Columns_Added_Non_Existed_Rows_Added.xlsx"))
+    files = sorted(Path(".").glob("*_Columns_Added_Missing_Rows_Added.xlsx"))
     if not files:
         print("No matching input files found.")
         sys.exit(1)
