@@ -4,9 +4,9 @@
 """
 add_column.py – enrich zone workbooks with calendar columns.
 
-• Adds “Day of Week” and “Month” derived from the “Date” column  
-• Re-orders columns so core metadata appears first  
-• Saves each `*_Original.xlsx` as `*_Columns_Added.xlsx`
+- Adds “Day of Week” and “Month” derived from the “Date” column  
+- Re-orders columns so core metadata appears first  
+- Saves each `*_Original.xlsx` as `*_Columns_Added.xlsx`
 """
 
 
