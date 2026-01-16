@@ -5,7 +5,7 @@
 
 > **Paper:** Siamak Solat and Nikolaos Georgantas,  
 > *Federated Learning for Occupancy Prediction with Highly Imbalanced, Non-IID, Low-Volume Data: An Empirical Study*  
-> (Submitted to ACM SAC 2026 Conference)
+> (Submitted to ACM BuildSys 2026 Conference) 
 
 
 ---
