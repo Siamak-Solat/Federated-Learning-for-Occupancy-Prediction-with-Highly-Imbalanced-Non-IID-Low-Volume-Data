@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](#requirements)
 
-> **Paper:** Siamak Solat and Nikolaos Georgantas,  
+> **Paper:** 
 > *Federated Learning for Occupancy Prediction with Highly Imbalanced, Non-IID, Low-Volume Data: An Empirical Study*  
 > (Submitted to ACM BuildSys 2026 Conference) 
 
